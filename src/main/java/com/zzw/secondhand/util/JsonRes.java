@@ -1,12 +1,12 @@
-package com.zzw.secondhand.dto;
+package com.zzw.secondhand.util;
 
-public class JsonRes {
+public class JsonRes<T> {
 
     private Integer errCode;
 
     private String errMsg;
 
-    private Object data;
+    private T data;
 
     public JsonRes(Integer errCode, String errMsg) {
         this.errCode = errCode;
@@ -17,7 +17,7 @@ public class JsonRes {
         return errCode;
     }
 
-    public JsonRes setErrCode(Integer errCode) {
+    public JsonRes<T> setErrCode(Integer errCode) {
         this.errCode = errCode;
         return this;
     }
@@ -26,16 +26,16 @@ public class JsonRes {
         return errMsg;
     }
 
-    public JsonRes setErrMsg(String errMsg) {
+    public JsonRes<T> setErrMsg(String errMsg) {
         this.errMsg = errMsg;
         return this;
     }
 
-    public Object getData() {
+    public T getData() {
         return data;
     }
 
-    public JsonRes setData(Object data) {
+    public JsonRes<T> setData(T data) {
         this.data = data;
         return this;
     }

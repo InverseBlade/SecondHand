@@ -1,4 +1,4 @@
-package com.zzw.secondhand.entity;
+package com.zzw.secondhand.po;
 
 public class User {
 

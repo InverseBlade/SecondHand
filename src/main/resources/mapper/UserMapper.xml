@@ -4,10 +4,83 @@
 
 <mapper namespace="com.zzw.secondhand.dao.UserDao">
 
-    <select id="selectOne" parameterType="Integer" resultType="User">
+    <select id="selectById" parameterType="Integer" resultType="User">
         SELECT *
         FROM second_user
         WHERE id = #{id, jdbcType=INTEGER}
     </select>
+
+    <insert id="insertAndGetId" parameterType="User" keyProperty="id">
+        INSERT INTO second_user(user_name, password, nick_name, phone, qq, wei_xin, college, area, grade)
+        VALUES (#{userName},
+                #{password},
+                #{nickName, jdbcType=VARCHAR},
+                #{phone, jdbcType=CHAR},
+                #{qq, jdbcType=CHAR},
+                #{weiXin, jdbcType=CHAR},
+                #{college, jdbcType=VARCHAR},
+                #{area, jdbcType=VARCHAR},
+                #{grade})
+    </insert>
+
+    <delete id="deleteById" parameterType="Integer">
+        DELETE
+        FROM second_user
+        WHERE id = #{id}
+    </delete>
+
+    <update id="updateById" parameterType="User">
+        UPDATE second_user
+        <set>
+            <if test="userName != null">
+                user_name = #{userName},
+            </if>
+            <if test="password != null">
+                password  = #{password},
+            </if>
+            nick_name = #{nickName, jdbcType=VARCHAR},
+            phone     = #{phone, jdbcType=CHAR},
+            qq        = #{qq, jdbcType=CHAR},
+            wei_xin   = #{weiXin, jdbcType=CHAR},
+            college   = #{college, jdbcType=VARCHAR},
+            area      = #{area, jdbcType=VARCHAR},
+            grade     = #{grade}
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <update id="updateSelectiveById" parameterType="User">
+        UPDATE second_user
+        <set>
+            <if test="userName != null">
+                user_name = #{userName},
+            </if>
+            <if test="password != null">
+                password = #{password},
+            </if>
+            <if test="nickName != null">
+                nick_name = #{nickName},
+            </if>
+            <if test="phone != null">
+                phone = #{phone},
+            </if>
+            <if test="qq != null">
+                qq = #{qq},
+            </if>
+            <if test="weiXin != null">
+                wei_xin = #{weiXin},
+            </if>
+            <if test="college != null">
+                college = #{college},
+            </if>
+            <if test="area != null">
+                area = #{area},
+            </if>
+            <if test="grade != null">
+                grade = #{grade},
+            </if>
+        </set>
+        WHERE id = #{id}
+    </update>
 
 </mapper>
