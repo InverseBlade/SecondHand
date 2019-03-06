@@ -1,11 +1,13 @@
 package com.zzw.secondhand.service.impl;
 
 import com.zzw.secondhand.dao.GoodsDao;
+import com.zzw.secondhand.dto.GoodsListFilter;
 import com.zzw.secondhand.po.Goods;
 import com.zzw.secondhand.service.GoodsService;
 import com.zzw.secondhand.util.JsonRes;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 public class GoodsServiceImpl implements GoodsService {
 
@@ -55,5 +57,25 @@ public class GoodsServiceImpl implements GoodsService {
         } catch (Exception e) {
             return new JsonRes(1, e.getMessage());
         }
+    }
+
+    @Override
+    public JsonRes<List<Goods>> listGoods(GoodsListFilter filter, Integer page, Integer limit) {
+        return null;
+    }
+
+    @Override
+    public JsonRes increaseRead(Integer id) {
+        return null;
+    }
+
+    @Override
+    public JsonRes updateStatus(Integer id, String status) {
+        return null;
+    }
+
+    @Override
+    public JsonRes buy(Integer id, Integer buyerId) {
+        return null;
     }
 }

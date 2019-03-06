@@ -1,6 +1,6 @@
 package com.zzw.secondhand.dto;
 
-public class UserLoginInfo {
+public class UserLoginDTO {
 
     private String userName;
 

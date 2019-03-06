@@ -1,6 +1,6 @@
 package com.zzw.secondhand.dto;
 
-public class UserBasicInfo {
+public class UserBasicDTO {
 
     private Integer id;
 

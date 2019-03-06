@@ -11,7 +11,7 @@
     </select>
 
     <insert id="insertAndGetId" parameterType="User" keyProperty="id">
-        INSERT INTO second_user(user_name, password, nick_name, phone, qq, wei_xin, college, area, grade)
+        INSERT INTO second_user(user_name, `password`, nick_name, phone, qq, wei_xin, college, area, grade)
         VALUES (#{userName},
                 #{password},
                 #{nickName, jdbcType=VARCHAR},
@@ -36,7 +36,7 @@
                 user_name = #{userName},
             </if>
             <if test="password != null">
-                password  = #{password},
+                `password`  = #{password},
             </if>
             nick_name = #{nickName, jdbcType=VARCHAR},
             phone     = #{phone, jdbcType=CHAR},
@@ -56,7 +56,7 @@
                 user_name = #{userName},
             </if>
             <if test="password != null">
-                password = #{password},
+                `password` = #{password},
             </if>
             <if test="nickName != null">
                 nick_name = #{nickName},
