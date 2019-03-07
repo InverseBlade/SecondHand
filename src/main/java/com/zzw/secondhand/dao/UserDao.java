@@ -21,5 +21,7 @@ public interface UserDao {
 
     void updateSelectiveById(User user) throws Exception;
 
+    User selectLoginInfoByUserName(@Param("userName") String userName) throws Exception;
+
 
 }

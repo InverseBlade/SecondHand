@@ -5,10 +5,12 @@ import com.zzw.secondhand.dto.GoodsListFilter;
 import com.zzw.secondhand.po.Goods;
 import com.zzw.secondhand.service.GoodsService;
 import com.zzw.secondhand.util.JsonRes;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
 
+@Service
 public class GoodsServiceImpl implements GoodsService {
 
     @Resource
@@ -75,7 +77,12 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-    public JsonRes buy(Integer id, Integer buyerId) {
+    public JsonRes buy(Integer id) {
+        return null;
+    }
+
+    @Override
+    public JsonRes favorite(Integer id) {
         return null;
     }
 }

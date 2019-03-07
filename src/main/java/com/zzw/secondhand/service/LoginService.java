@@ -1,6 +1,5 @@
 package com.zzw.secondhand.service;
 
-import com.zzw.secondhand.dto.AccessTokenDTO;
 import com.zzw.secondhand.dto.UserLoginDTO;
 import com.zzw.secondhand.po.User;
 import com.zzw.secondhand.util.JsonRes;
@@ -13,7 +12,7 @@ public interface LoginService {
      * @param loginDTO UserLoginDTO
      * @return JsonRes
      */
-    JsonRes<AccessTokenDTO> checkIn(UserLoginDTO loginDTO);
+    JsonRes<String> checkIn(UserLoginDTO loginDTO);
 
     /**
      * 注册接口

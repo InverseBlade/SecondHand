@@ -36,15 +36,15 @@
                 user_name = #{userName},
             </if>
             <if test="password != null">
-                `password`  = #{password},
+                `password` = #{password},
             </if>
             nick_name = #{nickName, jdbcType=VARCHAR},
-            phone     = #{phone, jdbcType=CHAR},
-            qq        = #{qq, jdbcType=CHAR},
-            wei_xin   = #{weiXin, jdbcType=CHAR},
-            college   = #{college, jdbcType=VARCHAR},
-            area      = #{area, jdbcType=VARCHAR},
-            grade     = #{grade}
+            phone = #{phone, jdbcType=CHAR},
+            qq = #{qq, jdbcType=CHAR},
+            wei_xin = #{weiXin, jdbcType=CHAR},
+            college = #{college, jdbcType=VARCHAR},
+            area = #{area, jdbcType=VARCHAR},
+            grade = #{grade}
         </set>
         WHERE id = #{id}
     </update>
@@ -82,5 +82,14 @@
         </set>
         WHERE id = #{id}
     </update>
+
+    <select id="selectLoginInfoByUserName" parameterType="String" resultType="User">
+        SELECT id,
+               user_name,
+               `password`
+        FROM second_user
+        WHERE user_name = #{userName, jdbcType=VARCHAR}
+        LIMIT 1
+    </select>
 
 </mapper>

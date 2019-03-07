@@ -28,18 +28,6 @@ public class UserController {
     }
 
     /**
-     * 创建新用户
-     *
-     * @param user    User
-     * @param request Request
-     * @return JsonRes
-     */
-    @RequestMapping(value = "/create", method = RequestMethod.POST)
-    JsonRes create(User user, HttpServletRequest request) {
-        return userService.add(user);
-    }
-
-    /**
      * 修改用户信息
      *
      * @param user    User
@@ -48,18 +36,31 @@ public class UserController {
      */
     @RequestMapping(value = "/update", method = RequestMethod.PUT)
     JsonRes update(User user, HttpServletRequest request) {
+        user.setId((Integer) request.getAttribute("session:userId"));
         return userService.modify(user);
     }
 
     /**
-     * 删除用户
+     * 获取当前登录用户
      *
-     * @param id Id
+     * @param request Request
      * @return JsonRes
      */
-    @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
-    JsonRes delete(Integer id) {
-        return userService.removeById(id);
+    @RequestMapping(value = "/info", method = RequestMethod.GET)
+    JsonRes<User> getCurUser(HttpServletRequest request) {
+        Integer uid = (Integer) request.getAttribute("session:userId");
+        return userService.findById(uid);
     }
+
+//    /**
+//     * 删除用户
+//     *
+//     * @param id Id
+//     * @return JsonRes
+//     */
+//    @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
+//    JsonRes delete(Integer id) {
+//        return userService.removeById(id);
+//    }
 
 }

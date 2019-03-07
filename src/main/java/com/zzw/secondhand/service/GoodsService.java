@@ -5,7 +5,6 @@ import com.zzw.secondhand.po.Goods;
 import com.zzw.secondhand.util.JsonRes;
 
 import java.util.List;
-import java.util.Map;
 
 public interface GoodsService {
 
@@ -73,10 +72,17 @@ public interface GoodsService {
     /**
      * 购买物品
      *
-     * @param id      Id
-     * @param buyerId buyerId
+     * @param id Id
      * @return JsonRes
      */
-    JsonRes buy(Integer id, Integer buyerId);
+    JsonRes buy(Integer id);
+
+    /**
+     * 收藏物品
+     *
+     * @param id Id
+     * @return JsonRes
+     */
+    JsonRes favorite(Integer id);
 
 }
