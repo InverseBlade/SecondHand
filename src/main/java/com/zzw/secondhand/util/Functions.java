@@ -23,7 +23,6 @@ public class Functions {
                 .withIssuer("secondhand")
                 .withSubject(info.getUserName())
                 .withClaim("uid", info.getUid())
-                .withClaim("ip", info.getLoginIP())
                 .withExpiresAt(info.getExpire())
                 .sign(Algorithm.HMAC256(info.getSecret()));
     }
@@ -41,7 +40,7 @@ public class Functions {
                     .withIssuer("secondhand")
                     .withSubject(userName)
                     .withClaim("uid", uid)
-                    .withClaim("ip", info.getLoginIP())
+//                    .withClaim("ip", info.getLoginIP())
                     .build()
                     .verify(info.getToken());
             return new User().setId(uid).setUserName(userName);

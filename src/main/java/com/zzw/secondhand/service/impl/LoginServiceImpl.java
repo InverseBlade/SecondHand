@@ -40,9 +40,8 @@ public class LoginServiceImpl implements LoginService {
                     new TokenInfo()
                             .setUserName(user.getUserName())
                             .setUid(user.getId())
-                            .setLoginIP(loginDTO.getLoginIP())
                             .setExpire(expire)
-                            .setSecret(secret)
+                            .setSecret(loginDTO.getLoginIP() + secret)
             );
             return new JsonRes<String>(0, "ok").setData(token);
         } catch (Exception e) {

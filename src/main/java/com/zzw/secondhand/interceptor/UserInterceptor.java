@@ -25,18 +25,15 @@ public class UserInterceptor implements HandlerInterceptor {
     private UserService userService;
 
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+    public boolean preHandle(HttpServletRequest request,
+                             HttpServletResponse response, Object handler) throws Exception {
         //
         String token = request.getHeader("token");
         try {
-            TokenInfo info = new TokenInfo();
-            info.setToken(token)
-                    .setSecret(secret)
-                    .setLoginIP(Functions.getIpAddr(request));
-            System.out.println(info.getLoginIP());
-
+            TokenInfo info = new TokenInfo()
+                    .setToken(token)
+                    .setSecret(Functions.getIpAddr(request) + secret);
             User user = Functions.verifyToken(info);
-
             //TO-DO
             request.setAttribute("session:userId", user.getId());
 
@@ -52,12 +49,16 @@ public class UserInterceptor implements HandlerInterceptor {
     }
 
     @Override
-    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+    public void postHandle(HttpServletRequest request,
+                           HttpServletResponse response,
+                           Object handler, ModelAndView modelAndView) throws Exception {
 
     }
 
     @Override
-    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+    public void afterCompletion(HttpServletRequest request,
+                                HttpServletResponse response,
+                                Object handler, Exception ex) throws Exception {
 
     }
 }
