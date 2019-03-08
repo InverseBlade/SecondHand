@@ -6,29 +6,32 @@ public class UserLoginDTO {
 
     private String password;
 
-    private String token;
+    private String loginIP;
 
     public String getUserName() {
         return userName;
     }
 
-    public void setUserName(String userName) {
+    public UserLoginDTO setUserName(String userName) {
         this.userName = userName;
+        return this;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
+    public UserLoginDTO setPassword(String password) {
         this.password = password;
+        return this;
     }
 
-    public String getToken() {
-        return token;
+    public String getLoginIP() {
+        return loginIP;
     }
 
-    public void setToken(String token) {
-        this.token = token;
+    public UserLoginDTO setLoginIP(String loginIP) {
+        this.loginIP = loginIP;
+        return this;
     }
 }

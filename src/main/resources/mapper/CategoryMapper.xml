@@ -4,5 +4,43 @@
 
 <mapper namespace="com.zzw.secondhand.dao.CategoryDao">
 
+    <insert id="insertAndGetId" parameterType="Category" keyProperty="id">
+        INSERT INTO second_category(name)
+        VALUES (#{name})
+    </insert>
+
+    <delete id="deleteById" parameterType="Integer">
+        DELETE
+        FROM second_category
+        WHERE id = #{id}
+    </delete>
+
+    <select id="selectById" parameterType="Integer">
+        SELECT id,create_time
+        FROM second_category
+        WHERE id = #{id}
+    </select>
+
+    <update id="updateSelectiveById" parameterType="Category">
+        UPDATE second_category
+        <set>
+            <if test="name != null">
+                name = #{name},
+            </if>
+        </set>
+        WHERE id=#{id}
+    </update>
+
+    <select id="listAll" resultType="Category">
+        SELECT id,name,create_time
+        FROM second_category
+        ORDER BY id ASC
+    </select>
+
+    <select id="listIdAndName" resultType="Category">
+        SELECT id,name
+        FROM second_category
+        ORDER BY id
+    </select>
 
 </mapper>

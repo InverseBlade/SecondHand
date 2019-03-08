@@ -6,6 +6,7 @@ import com.zzw.secondhand.po.User;
 import com.zzw.secondhand.service.LoginService;
 import com.zzw.secondhand.util.Functions;
 import com.zzw.secondhand.util.JsonRes;
+import com.zzw.secondhand.util.TokenInfo;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -35,7 +36,14 @@ public class LoginServiceImpl implements LoginService {
                 throw new Exception("密码错误");
             }
             Date expire = new Date(System.currentTimeMillis() + expireTime);
-            String token = Functions.getToken(user, expire, secret);
+            String token = Functions.getToken(
+                    new TokenInfo()
+                            .setUserName(user.getUserName())
+                            .setUid(user.getId())
+                            .setLoginIP(loginDTO.getLoginIP())
+                            .setExpire(expire)
+                            .setSecret(secret)
+            );
             return new JsonRes<String>(0, "ok").setData(token);
         } catch (Exception e) {
             return new JsonRes<>(1, e.getMessage());

@@ -5,6 +5,7 @@ import com.zzw.secondhand.po.User;
 import com.zzw.secondhand.service.UserService;
 import com.zzw.secondhand.util.Functions;
 import com.zzw.secondhand.util.JsonRes;
+import com.zzw.secondhand.util.TokenInfo;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -28,7 +29,13 @@ public class UserInterceptor implements HandlerInterceptor {
         //
         String token = request.getHeader("token");
         try {
-            User user = Functions.verifyToken(token, secret);
+            TokenInfo info = new TokenInfo();
+            info.setToken(token)
+                    .setSecret(secret)
+                    .setLoginIP(Functions.getIpAddr(request));
+            System.out.println(info.getLoginIP());
+
+            User user = Functions.verifyToken(info);
 
             //TO-DO
             request.setAttribute("session:userId", user.getId());

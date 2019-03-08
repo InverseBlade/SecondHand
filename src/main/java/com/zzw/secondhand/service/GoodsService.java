@@ -1,5 +1,7 @@
 package com.zzw.secondhand.service;
 
+import com.zzw.secondhand.dto.GoodsFormDTO;
+import com.zzw.secondhand.dto.GoodsListDTO;
 import com.zzw.secondhand.dto.GoodsListFilter;
 import com.zzw.secondhand.po.Goods;
 import com.zzw.secondhand.util.JsonRes;
@@ -16,9 +18,25 @@ public interface GoodsService {
      * @param limit  int
      * @return JsonRes
      */
-    JsonRes<List<Goods>> listGoods(GoodsListFilter filter,
-                                   Integer page,
-                                   Integer limit);
+    JsonRes<List<GoodsListDTO>> listGoods(GoodsListFilter filter,
+                                          Integer page,
+                                          Integer limit);
+
+    /**
+     * 获取用户卖出的商品
+     *
+     * @param userId userId
+     * @return JsonRes
+     */
+    JsonRes<List<GoodsListDTO>> listSoldByUserId(Integer userId);
+
+    /**
+     * 获得用户买过的商品
+     *
+     * @param userId userId
+     * @return JsonRes
+     */
+    JsonRes<List<GoodsListDTO>> listBoughtByUserId(Integer userId);
 
     /**
      * 获得商品detail
@@ -31,18 +49,18 @@ public interface GoodsService {
     /**
      * 添加商品
      *
-     * @param goods Goods
+     * @param goodsFormDTO Goods
      * @return JsonRes
      */
-    JsonRes<Integer> add(Goods goods);
+    JsonRes<Integer> add(GoodsFormDTO goodsFormDTO);
 
     /**
      * 修改商品部分信息
      *
-     * @param goods Goods
+     * @param goodsFormDTO Goods
      * @return JsonRes
      */
-    JsonRes modifySelectiveById(Goods goods);
+    JsonRes modifySelectiveById(GoodsFormDTO goodsFormDTO);
 
     /**
      * 删除商品
@@ -76,13 +94,5 @@ public interface GoodsService {
      * @return JsonRes
      */
     JsonRes buy(Integer id);
-
-    /**
-     * 收藏物品
-     *
-     * @param id Id
-     * @return JsonRes
-     */
-    JsonRes favorite(Integer id);
 
 }

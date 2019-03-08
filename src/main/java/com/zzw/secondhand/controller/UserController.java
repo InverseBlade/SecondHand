@@ -1,5 +1,6 @@
 package com.zzw.secondhand.controller;
 
+import com.zzw.secondhand.dto.UserBasicDTO;
 import com.zzw.secondhand.po.User;
 import com.zzw.secondhand.service.UserService;
 import com.zzw.secondhand.util.JsonRes;
@@ -23,7 +24,7 @@ public class UserController {
      * @return JsonRes
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    JsonRes<User> get(@PathVariable("id") Integer id) {
+    JsonRes<UserBasicDTO> get(@PathVariable("id") Integer id) {
         return userService.findById(id);
     }
 
@@ -47,7 +48,7 @@ public class UserController {
      * @return JsonRes
      */
     @RequestMapping(value = "/info", method = RequestMethod.GET)
-    JsonRes<User> getCurUser(HttpServletRequest request) {
+    JsonRes<UserBasicDTO> getCurUser(HttpServletRequest request) {
         Integer uid = (Integer) request.getAttribute("session:userId");
         return userService.findById(uid);
     }

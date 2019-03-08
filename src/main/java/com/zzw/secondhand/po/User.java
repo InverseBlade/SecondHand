@@ -26,79 +26,89 @@ public class User {
         return id;
     }
 
-    public void setId(Integer id) {
+    public User setId(Integer id) {
         this.id = id;
+        return this;
     }
 
     public String getUserName() {
         return userName;
     }
 
-    public void setUserName(String userName) {
+    public User setUserName(String userName) {
         this.userName = userName;
+        return this;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
+    public User setPassword(String password) {
         this.password = password;
+        return this;
     }
 
     public String getNickName() {
         return nickName;
     }
 
-    public void setNickName(String nickName) {
+    public User setNickName(String nickName) {
         this.nickName = nickName;
+        return this;
     }
 
     public String getPhone() {
         return phone;
     }
 
-    public void setPhone(String phone) {
+    public User setPhone(String phone) {
         this.phone = phone;
+        return this;
     }
 
     public String getQq() {
         return qq;
     }
 
-    public void setQq(String qq) {
+    public User setQq(String qq) {
         this.qq = qq;
+        return this;
     }
 
     public String getWeiXin() {
         return weiXin;
     }
 
-    public void setWeiXin(String weiXin) {
+    public User setWeiXin(String weiXin) {
         this.weiXin = weiXin;
+        return this;
     }
 
     public String getCollege() {
         return college;
     }
 
-    public void setCollege(String college) {
+    public User setCollege(String college) {
         this.college = college;
+        return this;
     }
 
     public String getArea() {
         return area;
     }
 
-    public void setArea(String area) {
+    public User setArea(String area) {
         this.area = area;
+        return this;
     }
 
     public String getGrade() {
         return grade;
     }
 
-    public void setGrade(String grade) {
+    public User setGrade(String grade) {
         this.grade = grade;
+        return this;
     }
 }

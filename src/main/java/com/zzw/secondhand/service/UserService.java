@@ -1,5 +1,6 @@
 package com.zzw.secondhand.service;
 
+import com.zzw.secondhand.dto.UserBasicDTO;
 import com.zzw.secondhand.po.User;
 import com.zzw.secondhand.util.JsonRes;
 
@@ -11,7 +12,7 @@ public interface UserService {
      * @param id Id
      * @return JsonRes
      */
-    JsonRes<User> findById(Integer id);
+    JsonRes<UserBasicDTO> findById(Integer id);
 
     /**
      * 添加新用户
