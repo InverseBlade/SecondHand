@@ -8,7 +8,7 @@
         INSERT INTO second_goods(`name`, `desc`, submit_time, buy_time, quantity,
                                  price, origin_price, buyer_id, seller_id, `status`,
                                  `read`, thumbs, area, category_id)
-        VALUES (#{name}, #{desc}, #{submitTime}, #{buyTime}, #{quantity},
+        VALUES (#{name}, #{desc}, #{submitTime}, #{buyTime, jdbcType=TIMESTAMP}, #{quantity},
                 #{price}, #{originPrice}, #{buyerId}, #{sellerId}, #{status},
                 #{read}, #{thumbs}, #{area}, #{categoryId})
     </insert>
@@ -19,7 +19,7 @@
         WHERE id = #{id}
     </delete>
 
-    <select id="selectById" parameterType="Integer">
+    <select id="selectById" parameterType="Integer" resultType="Goods">
         SELECT *
         FROM second_goods
         WHERE id = #{id}
@@ -73,5 +73,50 @@
         </set>
         WHERE id=#{id}
     </update>
+
+    <update id="increaseRead" parameterType="Integer">
+        UPDATE second_goods
+        SET `read` = `read` + 1
+        WHERE id = #{id}
+    </update>
+
+    <select id="listGoods" resultType="com.zzw.secondhand.dto.GoodsListDTO">
+        SELECT  g.id,
+                g.`name`,
+                `desc`,
+                submit_time,
+                quantity,
+                price,
+                origin_price,
+                seller_id,
+                `read`,
+                thumbs,
+                g.area,
+                category_id,
+                u.nick_name,
+                c.name AS 'category'
+        FROM second_goods AS g
+        INNER JOIN second_user u ON u.id = g.seller_id
+        INNER JOIN second_category c ON g.category_id = c.id
+        <where>
+            <if test="filter.keyWord != null">
+                AND (g.`name` LIKE CONCAT('%',#{filter.keyWord},'%')
+                OR g.`desc` LIKE CONCAT('%',#{filter.keyWord},'%'))
+            </if>
+            <if test="filter.categoryId != null">
+                AND g.category_id = #{filter.categoryId}
+            </if>
+            <if test="filter.area != null">
+                AND g.area = #{filter.area}
+            </if>
+            <if test="filter.sellerId != null">
+                AND g.seller_id = #{filter.sellerId}
+            </if>
+            <if test="filter.buyerId != null">
+                AND g.buyer_id = #{filter.buyerId}
+            </if>
+        </where>
+        LIMIT #{offset},#{limit}
+    </select>
 
 </mapper>

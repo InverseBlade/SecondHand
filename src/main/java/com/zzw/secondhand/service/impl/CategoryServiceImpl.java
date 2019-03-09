@@ -21,9 +21,9 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public JsonRes<List<CategoryDTO>> list() {
         try {
-            List<Category> categorys = categoryDao.listIdAndName();
+            List<Category> categories = categoryDao.listIdAndName();
             List<CategoryDTO> categoryDTOS = new ArrayList<>();
-            for (Category item : categorys) {
+            for (Category item : categories) {
                 CategoryDTO temp = new CategoryDTO();
                 BeanUtils.copyProperties(item, temp);
                 categoryDTOS.add(temp);

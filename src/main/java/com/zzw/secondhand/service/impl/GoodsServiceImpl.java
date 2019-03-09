@@ -1,16 +1,19 @@
 package com.zzw.secondhand.service.impl;
 
 import com.zzw.secondhand.dao.GoodsDao;
+import com.zzw.secondhand.dao.UserDao;
 import com.zzw.secondhand.dto.GoodsFormDTO;
 import com.zzw.secondhand.dto.GoodsListDTO;
 import com.zzw.secondhand.dto.GoodsListFilter;
 import com.zzw.secondhand.po.Goods;
+import com.zzw.secondhand.po.User;
 import com.zzw.secondhand.service.GoodsService;
 import com.zzw.secondhand.util.JsonRes;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Service
@@ -18,6 +21,9 @@ public class GoodsServiceImpl implements GoodsService {
 
     @Resource
     private GoodsDao goodsDao;
+
+    @Resource
+    private UserDao userDao;
 
     @Override
     public JsonRes<Goods> findById(Integer id) {
@@ -33,16 +39,25 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-    public JsonRes<Integer> add(GoodsFormDTO goodsFormDTO) {
+    public JsonRes<Integer> add(GoodsFormDTO goodsFormDTO, Integer userId) {
         try {
-            Goods goods = new Goods();
             int id;
+            Goods goods = new Goods();
             BeanUtils.copyProperties(goodsFormDTO, goods);
             //TO-DO
-
+            User user;
+            if ((user = userDao.selectById(userId)) == null) {
+                throw new Exception("用户非法!");
+            }
+            goods.setSubmitTime(new Timestamp(System.currentTimeMillis()))
+                    .setBuyTime(null)
+                    .setBuyerId(0)
+                    .setSellerId(user.getId())
+                    .setStatus("上架")
+                    .setRead(0);
             goodsDao.insertAndGetId(goods);
             id = goods.getId();
-            return new JsonRes<Integer>(0, "").setData(id);
+            return new JsonRes<Integer>(0, "succeed").setData(id);
         } catch (Exception e) {
             return new JsonRes<>(1, e.getMessage());
         }
@@ -72,7 +87,15 @@ public class GoodsServiceImpl implements GoodsService {
 
     @Override
     public JsonRes<List<GoodsListDTO>> listGoods(GoodsListFilter filter, Integer page, Integer limit) {
-        return null;
+        try {
+            List<GoodsListDTO> goods;
+            int offset = (page - 1) * limit;
+            goods = goodsDao.listGoods(filter, offset, limit);
+            return new JsonRes<List<GoodsListDTO>>(0, "succeed")
+                    .setData(goods);
+        } catch (Exception e) {
+            return new JsonRes<>(1, e.getMessage());
+        }
     }
 
     @Override
@@ -87,16 +110,37 @@ public class GoodsServiceImpl implements GoodsService {
 
     @Override
     public JsonRes increaseRead(Integer id) {
-        return null;
+        try {
+            goodsDao.increaseRead(id);
+            return new JsonRes(0, "succeed");
+        } catch (Exception e) {
+            return new JsonRes(1, e.getMessage());
+        }
     }
 
     @Override
     public JsonRes updateStatus(Integer id, String status) {
-        return null;
+        try {
+            goodsDao.updateSelectiveById(
+                    new Goods().setId(id).setStatus(status));
+            return new JsonRes(0, "succeed");
+        } catch (Exception e) {
+            return new JsonRes(1, e.getMessage());
+        }
     }
 
     @Override
-    public JsonRes buy(Integer id) {
-        return null;
+    public JsonRes buy(Integer userId, Integer goodsId) {
+        try {
+            goodsDao.updateSelectiveById(
+                    new Goods().setId(goodsId)
+                            .setSellerId(userId)
+                            .setBuyTime(new Timestamp(System.currentTimeMillis()))
+                            .setStatus("已售")
+            );
+            return new JsonRes(0, "succeed");
+        } catch (Exception e) {
+            return new JsonRes(1, e.getMessage());
+        }
     }
 }

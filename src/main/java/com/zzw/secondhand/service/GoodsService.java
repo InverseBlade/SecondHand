@@ -52,7 +52,7 @@ public interface GoodsService {
      * @param goodsFormDTO Goods
      * @return JsonRes
      */
-    JsonRes<Integer> add(GoodsFormDTO goodsFormDTO);
+    JsonRes<Integer> add(GoodsFormDTO goodsFormDTO, Integer userId);
 
     /**
      * 修改商品部分信息
@@ -93,6 +93,6 @@ public interface GoodsService {
      * @param id Id
      * @return JsonRes
      */
-    JsonRes buy(Integer id);
+    JsonRes buy(Integer userId, Integer goodsId);
 
 }

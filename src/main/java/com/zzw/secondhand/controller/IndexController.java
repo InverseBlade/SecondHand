@@ -26,7 +26,6 @@ public class IndexController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public JsonRes<String> login(UserLoginDTO userLoginDTO, HttpServletRequest request) {
         userLoginDTO.setLoginIP(Functions.getIpAddr(request));
-        System.out.println(request.getParameter("userName") + " " + request.getParameter("password"));
         return loginService.checkIn(userLoginDTO);
     }
 

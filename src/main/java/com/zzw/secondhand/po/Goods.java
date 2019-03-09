@@ -38,119 +38,134 @@ public class Goods {
         return id;
     }
 
-    public void setId(Integer id) {
+    public Goods setId(Integer id) {
         this.id = id;
+        return this;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public Goods setName(String name) {
         this.name = name;
+        return this;
     }
 
     public String getDesc() {
         return desc;
     }
 
-    public void setDesc(String desc) {
+    public Goods setDesc(String desc) {
         this.desc = desc;
+        return this;
     }
 
     public Timestamp getSubmitTime() {
         return submitTime;
     }
 
-    public void setSubmitTime(Timestamp submitTime) {
+    public Goods setSubmitTime(Timestamp submitTime) {
         this.submitTime = submitTime;
+        return this;
     }
 
     public Timestamp getBuyTime() {
         return buyTime;
     }
 
-    public void setBuyTime(Timestamp buyTime) {
+    public Goods setBuyTime(Timestamp buyTime) {
         this.buyTime = buyTime;
+        return this;
     }
 
     public Integer getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(Integer quantity) {
+    public Goods setQuantity(Integer quantity) {
         this.quantity = quantity;
+        return this;
     }
 
     public Float getPrice() {
         return price;
     }
 
-    public void setPrice(Float price) {
+    public Goods setPrice(Float price) {
         this.price = price;
+        return this;
     }
 
     public Float getOriginPrice() {
         return originPrice;
     }
 
-    public void setOriginPrice(Float originPrice) {
+    public Goods setOriginPrice(Float originPrice) {
         this.originPrice = originPrice;
+        return this;
     }
 
     public Integer getBuyerId() {
         return buyerId;
     }
 
-    public void setBuyerId(Integer buyerId) {
+    public Goods setBuyerId(Integer buyerId) {
         this.buyerId = buyerId;
+        return this;
     }
 
     public Integer getSellerId() {
         return sellerId;
     }
 
-    public void setSellerId(Integer sellerId) {
+    public Goods setSellerId(Integer sellerId) {
         this.sellerId = sellerId;
+        return this;
     }
 
     public String getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public Goods setStatus(String status) {
         this.status = status;
+        return this;
     }
 
     public Integer getRead() {
         return read;
     }
 
-    public void setRead(Integer read) {
+    public Goods setRead(Integer read) {
         this.read = read;
+        return this;
     }
 
     public String getThumbs() {
         return thumbs;
     }
 
-    public void setThumbs(String thumbs) {
+    public Goods setThumbs(String thumbs) {
         this.thumbs = thumbs;
+        return this;
     }
 
     public String getArea() {
         return area;
     }
 
-    public void setArea(String area) {
+    public Goods setArea(String area) {
         this.area = area;
+        return this;
     }
 
     public Integer getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(Integer categoryId) {
+    public Goods setCategoryId(Integer categoryId) {
         this.categoryId = categoryId;
+        return this;
     }
 }

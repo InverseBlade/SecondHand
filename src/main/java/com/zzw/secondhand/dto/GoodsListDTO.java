@@ -31,6 +31,18 @@ public class GoodsListDTO {
 
     private String nickName;
 
+    //分类
+    private String category;
+
+    public String getCategory() {
+        return category;
+    }
+
+    public GoodsListDTO setCategory(String category) {
+        this.category = category;
+        return this;
+    }
+
     public Integer getId() {
         return id;
     }
