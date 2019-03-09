@@ -20,7 +20,7 @@ public interface LoginService {
      * @param user User
      * @return JsonRes
      */
-    JsonRes register(User user);
+    JsonRes<Integer> register(User user);
 
     /**
      * 获取图片验证码

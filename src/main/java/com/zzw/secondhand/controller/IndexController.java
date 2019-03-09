@@ -1,6 +1,7 @@
 package com.zzw.secondhand.controller;
 
 import com.zzw.secondhand.dto.UserLoginDTO;
+import com.zzw.secondhand.po.User;
 import com.zzw.secondhand.service.LoginService;
 import com.zzw.secondhand.util.Functions;
 import com.zzw.secondhand.util.JsonRes;
@@ -27,6 +28,11 @@ public class IndexController {
     public JsonRes<String> login(UserLoginDTO userLoginDTO, HttpServletRequest request) {
         userLoginDTO.setLoginIP(Functions.getIpAddr(request));
         return loginService.checkIn(userLoginDTO);
+    }
+
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public JsonRes<Integer> register(User user) {
+        return loginService.register(user);
     }
 
 }

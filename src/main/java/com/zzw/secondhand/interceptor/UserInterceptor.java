@@ -27,7 +27,7 @@ public class UserInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request,
                              HttpServletResponse response, Object handler) throws Exception {
-        //
+        //获取验证Token头
         String token = request.getHeader("token");
         try {
             TokenInfo info = new TokenInfo()
