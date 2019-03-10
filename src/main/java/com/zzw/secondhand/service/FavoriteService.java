@@ -7,11 +7,11 @@ import java.util.List;
 
 public interface FavoriteService {
 
-    JsonRes create(Integer userId, Integer goodsId);
+    JsonRes<Integer> create(Integer userId, Integer goodsId);
 
     JsonRes remove(Integer userId, Integer goodsId);
 
-    List<GoodsListDTO> listGoodsByUserId(Integer userId);
+    JsonRes<List<GoodsListDTO>> listGoodsByUserId(Integer userId);
 
 
 }

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.zzw.secondhand.dao.FavoriteDao">
+
+    <insert id="insert" parameterType="Favorite">
+        INSERT INTO second_favorite(user_id, goods_id)
+        VALUES (#{userId}, #{goodsId})
+    </insert>
+
+    <delete id="deleteByUserIdAndGoodsId">
+        DELETE
+        FROM second_favorite
+        WHERE user_id = #{userId}
+          AND goods_id = #{goodsId}
+    </delete>
+
+    <select id="selectByUserIdAndGoodsId" resultType="Favorite">
+        SELECT *
+        FROM second_favorite
+        WHERE user_id = #{userId}
+          AND goods_id = #{goodsId}
+    </select>
+
+    <select id="listFavoriteGoodsByUserId"
+            parameterType="Integer"
+            resultType="com.zzw.secondhand.dto.GoodsListDTO">
+        SELECT g.id,
+               g.name,
+               g.`desc`,
+               g.submit_time,
+               g.quantity,
+               g.price,
+               g.origin_price,
+               g.status,
+               g.`read`,
+               g.thumbs,
+               g.area,
+               g.seller_id,
+               u.nick_name,
+               c.name AS 'category'
+        FROM second_favorite AS f
+                 INNER JOIN second_goods g ON g.id = f.goods_id
+                 INNER JOIN second_user u ON u.id = f.user_id
+                 INNER JOIN second_category c ON c.id = g.category_id
+        WHERE f.user_id = #{userId}
+    </select>
+
+</mapper>

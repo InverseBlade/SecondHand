@@ -32,13 +32,13 @@
     </update>
 
     <select id="listAll" resultType="Category">
-        SELECT id,name,create_time
+        SELECT id,`name`,create_time
         FROM second_category
         ORDER BY id ASC
     </select>
 
     <select id="listIdAndName" resultType="Category">
-        SELECT id,name
+        SELECT id,`name`
         FROM second_category
         ORDER BY id
     </select>

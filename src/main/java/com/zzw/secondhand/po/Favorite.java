@@ -14,23 +14,26 @@ public class Favorite {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public Favorite setUserId(Integer userId) {
         this.userId = userId;
+        return this;
     }
 
     public Integer getGoodsId() {
         return goodsId;
     }
 
-    public void setGoodsId(Integer goodsId) {
+    public Favorite setGoodsId(Integer goodsId) {
         this.goodsId = goodsId;
+        return this;
     }
 
     public Timestamp getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Timestamp createTime) {
+    public Favorite setCreateTime(Timestamp createTime) {
         this.createTime = createTime;
+        return this;
     }
 }

@@ -59,7 +59,7 @@ public class LoginServiceImpl implements LoginService {
             uid = user.getId();
             return new JsonRes<Integer>(0, "succeed").setData(uid);
         } catch (Exception e) {
-            return new JsonRes<>(1, e.getMessage());
+            return new JsonRes<>(1, "用户添加失败");
         }
     }
 
