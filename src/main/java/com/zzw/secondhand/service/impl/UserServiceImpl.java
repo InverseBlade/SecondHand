@@ -4,6 +4,7 @@ import com.zzw.secondhand.dao.UserDao;
 import com.zzw.secondhand.dto.UserBasicDTO;
 import com.zzw.secondhand.po.User;
 import com.zzw.secondhand.service.UserService;
+import com.zzw.secondhand.util.Functions;
 import com.zzw.secondhand.util.JsonRes;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public JsonRes<Integer> add(User user) {
         try {
+            user.setPassword(Functions.md5Password(user.getPassword()));
             userDao.insertAndGetId(user);
             int uid = user.getId();
             return new JsonRes<Integer>(0, "succeed").setData(uid);
@@ -30,6 +32,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public JsonRes modify(User user) {
         try {
+            user.setPassword(Functions.md5Password(user.getPassword()));
             userDao.updateById(user);
             return new JsonRes(0, "succeed");
         } catch (Exception e) {
@@ -40,6 +43,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public JsonRes modifySelective(User user) {
         try {
+            user.setPassword(Functions.md5Password(user.getPassword()));
             userDao.updateSelectiveById(user);
             return new JsonRes(0, "succeed");
         } catch (Exception e) {
