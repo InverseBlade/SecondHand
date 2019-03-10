@@ -1,6 +1,7 @@
 package com.zzw.secondhand.service.impl;
 
 import com.zzw.secondhand.dao.FavoriteDao;
+import com.zzw.secondhand.dao.GoodsDao;
 import com.zzw.secondhand.dto.GoodsListDTO;
 import com.zzw.secondhand.po.Favorite;
 import com.zzw.secondhand.service.FavoriteService;
@@ -16,9 +17,15 @@ public class FavoriteServiceImpl implements FavoriteService {
     @Resource
     private FavoriteDao favoriteDao;
 
+    @Resource
+    private GoodsDao goodsDao;
+
     @Override
     public JsonRes<Integer> create(Integer userId, Integer goodsId) {
         try {
+            if (goodsDao.selectById(goodsId) == null) {
+                throw new Exception("物品不存在");
+            }
             favoriteDao.insert(
                     new Favorite()
                             .setUserId(userId)

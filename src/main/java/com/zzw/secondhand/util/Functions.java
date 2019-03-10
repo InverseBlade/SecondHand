@@ -17,6 +17,10 @@ public class Functions {
         );
     }
 
+    public static String md5Password(String password) {
+        return md5(password, "mawenying");
+    }
+
     public static String getToken(TokenInfo info) {
         return JWT.create()
                 .withJWTId(String.valueOf(Math.random() * 99999))

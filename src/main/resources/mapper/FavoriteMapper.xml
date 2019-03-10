@@ -42,7 +42,7 @@
                c.name AS 'category'
         FROM second_favorite AS f
                  INNER JOIN second_goods g ON g.id = f.goods_id
-                 INNER JOIN second_user u ON u.id = f.user_id
+                 INNER JOIN second_user u ON u.id = g.seller_id
                  INNER JOIN second_category c ON c.id = g.category_id
         WHERE f.user_id = #{userId}
     </select>

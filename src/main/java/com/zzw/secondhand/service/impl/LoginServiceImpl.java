@@ -32,7 +32,7 @@ public class LoginServiceImpl implements LoginService {
             if ((user = userDao.selectLoginInfoByUserName(loginDTO.getUserName())) == null) {
                 throw new Exception("用户不存在");
             }
-            String password = Functions.md5(loginDTO.getPassword(), "mawenying");
+            String password = Functions.md5Password(loginDTO.getPassword());
             if (!password.equals(user.getPassword())) {
                 throw new Exception("密码错误");
             }
@@ -54,7 +54,7 @@ public class LoginServiceImpl implements LoginService {
     public JsonRes<Integer> register(User user) {
         try {
             int uid;
-            user.setPassword(Functions.md5(user.getPassword(), "mawenying"));
+            user.setPassword(Functions.md5Password(user.getPassword()));
             userDao.insertAndGetId(user);
             uid = user.getId();
             return new JsonRes<Integer>(0, "succeed").setData(uid);

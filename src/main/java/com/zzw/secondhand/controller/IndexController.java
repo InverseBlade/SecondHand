@@ -5,6 +5,7 @@ import com.zzw.secondhand.po.User;
 import com.zzw.secondhand.service.LoginService;
 import com.zzw.secondhand.util.Functions;
 import com.zzw.secondhand.util.JsonRes;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,6 +14,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/index")
 public class IndexController {
 

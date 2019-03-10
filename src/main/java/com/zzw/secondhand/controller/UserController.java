@@ -1,13 +1,16 @@
 package com.zzw.secondhand.controller;
 
+import com.zzw.secondhand.dto.GoodsListDTO;
 import com.zzw.secondhand.dto.UserBasicDTO;
 import com.zzw.secondhand.po.User;
+import com.zzw.secondhand.service.FavoriteService;
 import com.zzw.secondhand.service.UserService;
 import com.zzw.secondhand.util.JsonRes;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -16,6 +19,9 @@ public class UserController {
 
     @Resource
     private UserService userService;
+
+    @Resource
+    private FavoriteService favoriteService;
 
     /**
      * 获取用户详细信息
@@ -51,6 +57,12 @@ public class UserController {
     JsonRes<UserBasicDTO> getCurUser(HttpServletRequest request) {
         Integer uid = (Integer) request.getAttribute("session:userId");
         return userService.findById(uid);
+    }
+
+    @RequestMapping(value = "/favorite", method = RequestMethod.GET)
+    JsonRes<List<GoodsListDTO>> favorite(HttpServletRequest request) {
+        int uid = (Integer) request.getAttribute("session:userId");
+        return favoriteService.listGoodsByUserId(uid);
     }
 
 //    /**

@@ -15,8 +15,8 @@
         WHERE id = #{id}
     </delete>
 
-    <select id="selectById" parameterType="Integer">
-        SELECT id,create_time
+    <select id="selectById" parameterType="Integer" resultType="Category">
+        SELECT id, `name`, create_time
         FROM second_category
         WHERE id = #{id}
     </select>
