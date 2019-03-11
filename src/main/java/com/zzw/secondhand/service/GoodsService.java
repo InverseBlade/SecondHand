@@ -90,7 +90,8 @@ public interface GoodsService {
     /**
      * 购买物品
      *
-     * @param id Id
+     * @param userId  Buyer
+     * @param goodsId goodsId
      * @return JsonRes
      */
     JsonRes buy(Integer userId, Integer goodsId);

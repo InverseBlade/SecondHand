@@ -12,6 +12,17 @@ public class GoodsListFilter {
 
     private Integer buyerId;
 
+    private String status;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public GoodsListFilter setStatus(String status) {
+        this.status = status;
+        return this;
+    }
+
     public Integer getSellerId() {
         return sellerId;
     }

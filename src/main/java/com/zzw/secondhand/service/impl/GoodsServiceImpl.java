@@ -90,6 +90,10 @@ public class GoodsServiceImpl implements GoodsService {
         try {
             List<GoodsListDTO> goods;
             int offset = (page - 1) * limit;
+
+            //TO-DO
+            filter.setStatus("上架");
+
             goods = goodsDao.listGoods(filter, offset, limit);
             return new JsonRes<List<GoodsListDTO>>(0, "succeed")
                     .setData(goods);

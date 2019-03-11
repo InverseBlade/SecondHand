@@ -115,6 +115,9 @@
             <if test="filter.buyerId != null">
                 AND g.buyer_id = #{filter.buyerId}
             </if>
+            <if test="filter.status != null">
+                AND g.status = #{filter.status}
+            </if>
         </where>
         LIMIT #{offset},#{limit}
     </select>
