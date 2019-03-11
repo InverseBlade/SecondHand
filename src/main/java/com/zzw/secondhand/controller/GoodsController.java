@@ -24,13 +24,17 @@ public class GoodsController {
     @Resource
     FavoriteService favoriteService;
 
-    @RequestMapping(value = "/submit", method = RequestMethod.POST)
-    public JsonRes submit(GoodsFormDTO goodsFormDTO, HttpServletRequest request) {
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    public JsonRes save(GoodsFormDTO goodsFormDTO, HttpServletRequest request) {
         int uid = (Integer) request.getAttribute("session:userId");
-        return goodsService.add(goodsFormDTO, uid);
+        if (goodsFormDTO.getId() == null) {
+            return goodsService.add(goodsFormDTO, uid);
+        } else {
+            return goodsService.modifySelectiveById(goodsFormDTO);
+        }
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/detail/{id}", method = RequestMethod.GET)
     public JsonRes<Goods> detail(@PathVariable("id") Integer goodsId) {
         return goodsService.findById(goodsId);
     }

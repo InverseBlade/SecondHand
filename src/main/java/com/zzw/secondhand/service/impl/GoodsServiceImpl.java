@@ -138,7 +138,7 @@ public class GoodsServiceImpl implements GoodsService {
         try {
             goodsDao.updateSelectiveById(
                     new Goods().setId(goodsId)
-                            .setSellerId(userId)
+                            .setBuyerId(userId)
                             .setBuyTime(new Timestamp(System.currentTimeMillis()))
                             .setStatus("已售")
             );

@@ -2,6 +2,8 @@ package com.zzw.secondhand.dto;
 
 public class GoodsFormDTO {
 
+    private Integer id;
+
     private String name;
 
     private String desc;
@@ -17,6 +19,15 @@ public class GoodsFormDTO {
     private String area;
 
     private Integer categoryId;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public GoodsFormDTO setId(Integer id) {
+        this.id = id;
+        return this;
+    }
 
     public String getName() {
         return name;
