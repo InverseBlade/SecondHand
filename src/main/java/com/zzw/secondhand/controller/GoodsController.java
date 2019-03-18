@@ -34,7 +34,7 @@ public class GoodsController {
         }
     }
 
-    @RequestMapping(value = "/detail/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public JsonRes<Goods> detail(@PathVariable("id") Integer goodsId) {
         return goodsService.findById(goodsId);
     }

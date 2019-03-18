@@ -28,12 +28,12 @@ public class WebConfig implements WebMvcConfigurer {
                 .excludePathPatterns("/index")
                 .excludePathPatterns("/index/**");
 
-        registry.addInterceptor(goodsDetailInterceptor)
-                .addPathPatterns("/goods/detail/*");
-
         registry.addInterceptor(goodsSubmitInterceptor)
                 .addPathPatterns("/goods/save")
                 .addPathPatterns("/goods/status")
                 .addPathPatterns("/goods/buy");
+
+        registry.addInterceptor(goodsDetailInterceptor)
+                .addPathPatterns("/goods/*");
     }
 }

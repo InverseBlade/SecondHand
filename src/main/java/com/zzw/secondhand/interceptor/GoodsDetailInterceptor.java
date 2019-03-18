@@ -33,10 +33,14 @@ public class GoodsDetailInterceptor implements HandlerInterceptor {
                             HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE,
                             RequestAttributes.SCOPE_REQUEST);
             if (map != null && map.get("id") != null) {
-                int goodsId = Integer.parseInt(map.get("id"));
-                Goods goods = goodsDao.selectById(goodsId);
-                if (!goods.getStatus().equals("上架") && uid != goods.getSellerId()) {
-                    throw new Exception("Invalid Operation");
+                try {
+                    int goodsId = Integer.parseInt(map.get("id"));
+                    Goods goods = goodsDao.selectById(goodsId);
+                    if (!goods.getStatus().equals("上架") && uid != goods.getSellerId()) {
+                        throw new Exception("Invalid Operation");
+                    }
+                } catch (NumberFormatException e) {
+                    return true;
                 }
             }
             return true;
