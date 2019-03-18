@@ -1,7 +1,6 @@
 package com.zzw.secondhand.interceptor;
 
 import com.zzw.secondhand.dao.GoodsDao;
-import com.zzw.secondhand.dao.UserDao;
 import com.zzw.secondhand.po.Goods;
 import com.zzw.secondhand.util.Functions;
 import org.springframework.stereotype.Component;
@@ -18,9 +17,6 @@ import java.util.Map;
 
 @Component
 public class GoodsDetailInterceptor implements HandlerInterceptor {
-
-    @Resource
-    UserDao userDao;
 
     @Resource
     GoodsDao goodsDao;

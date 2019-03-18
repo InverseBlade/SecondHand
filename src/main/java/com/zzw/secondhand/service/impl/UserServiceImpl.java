@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService {
             int uid = user.getId();
             return new JsonRes<Integer>(0, "succeed").setData(uid);
         } catch (Exception e) {
-            return new JsonRes<Integer>(1, e.getMessage());
+            return new JsonRes<>(1, e.getMessage());
         }
     }
 

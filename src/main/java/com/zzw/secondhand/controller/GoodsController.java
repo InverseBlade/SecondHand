@@ -46,10 +46,25 @@ public class GoodsController {
         return goodsService.listGoods(filter, page, limit);
     }
 
-    @RequestMapping(value = "favorite", method = RequestMethod.POST)
+    @RequestMapping(value = "/favorite", method = RequestMethod.POST)
     public JsonRes favorite(Integer goodsId, HttpServletRequest request) {
         int uid = (Integer) request.getAttribute("session:userId");
         return favoriteService.create(uid, goodsId);
+    }
+
+    @RequestMapping(value = "/read", method = RequestMethod.POST)
+    public JsonRes read(Integer id) {
+        return goodsService.increaseRead(id);
+    }
+
+    @RequestMapping(value = "/status", method = RequestMethod.PUT)
+    public JsonRes status(Integer id, String status) {
+        return goodsService.updateStatus(id, status);
+    }
+
+    @RequestMapping(value = "/buy", method = RequestMethod.PUT)
+    public JsonRes buy(Integer userId, Integer id) {
+        return goodsService.buy(userId, id);
     }
 
 }

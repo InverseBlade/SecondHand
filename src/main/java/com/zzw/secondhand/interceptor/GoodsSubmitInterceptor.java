@@ -1,7 +1,6 @@
 package com.zzw.secondhand.interceptor;
 
 import com.zzw.secondhand.dao.GoodsDao;
-import com.zzw.secondhand.dao.UserDao;
 import com.zzw.secondhand.util.Functions;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -15,9 +14,6 @@ public class GoodsSubmitInterceptor implements HandlerInterceptor {
 
     @Resource
     private GoodsDao goodsDao;
-
-    @Resource
-    private UserDao userDao;
 
     @Override
     public boolean preHandle(HttpServletRequest request,

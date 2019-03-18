@@ -20,6 +20,7 @@ public class Functions {
         response.getWriter().println(
                 JSON.toJSONString(new JsonRes<>(1, "Invalid"))
         );
+        response.getWriter().close();
     }
 
     public static String md5(String raw, String salt) {
