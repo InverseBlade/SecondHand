@@ -1,8 +1,6 @@
 package com.zzw.secondhand.service;
 
-import com.zzw.secondhand.dto.GoodsFormDTO;
-import com.zzw.secondhand.dto.GoodsListDTO;
-import com.zzw.secondhand.dto.GoodsListFilter;
+import com.zzw.secondhand.dto.*;
 import com.zzw.secondhand.po.Goods;
 import com.zzw.secondhand.util.JsonRes;
 
@@ -95,5 +93,22 @@ public interface GoodsService {
      * @return JsonRes
      */
     JsonRes buy(Integer userId, Integer goodsId);
+
+    /**
+     * 联系卖方
+     *
+     * @param buyer   买方
+     * @param goodsId 商品Id
+     * @return JsonRes
+     */
+    JsonRes<UserBasicDTO> contact(Integer buyer, Integer goodsId);
+
+    /**
+     * 获取有意购买者
+     *
+     * @param goodsId goodsId
+     * @return JsonRes
+     */
+    JsonRes<List<WillerListDTO>> listWillers(Integer goodsId);
 
 }

@@ -2,9 +2,8 @@ package com.zzw.secondhand.service.impl;
 
 import com.zzw.secondhand.dao.GoodsDao;
 import com.zzw.secondhand.dao.UserDao;
-import com.zzw.secondhand.dto.GoodsFormDTO;
-import com.zzw.secondhand.dto.GoodsListDTO;
-import com.zzw.secondhand.dto.GoodsListFilter;
+import com.zzw.secondhand.dao.WillerDao;
+import com.zzw.secondhand.dto.*;
 import com.zzw.secondhand.po.Goods;
 import com.zzw.secondhand.po.User;
 import com.zzw.secondhand.service.GoodsService;
@@ -24,6 +23,9 @@ public class GoodsServiceImpl implements GoodsService {
 
     @Resource
     private UserDao userDao;
+
+    @Resource
+    private WillerDao willerDao;
 
     @Override
     public JsonRes<Goods> findById(Integer id) {
@@ -113,6 +115,25 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
+    public JsonRes<UserBasicDTO> contact(Integer buyerId, Integer goodsId) {
+        try {
+            Integer sellerId = goodsDao.selectById(goodsId).getSellerId();
+            UserBasicDTO userBasicDTO = new UserBasicDTO();
+            BeanUtils.copyProperties(
+                    userDao.selectById(sellerId),
+                    userBasicDTO
+            );
+            if (null == willerDao.selectByUserIdAndGoodsId(buyerId, goodsId)) {
+                willerDao.insertAndGetId(buyerId, goodsId);
+            }
+            return new JsonRes<UserBasicDTO>(0, "succeed")
+                    .setData(userBasicDTO);
+        } catch (Exception e) {
+            return new JsonRes<>(1, e.getMessage());
+        }
+    }
+
+    @Override
     public JsonRes increaseRead(Integer id) {
         try {
             goodsDao.increaseRead(id);
@@ -142,9 +163,20 @@ public class GoodsServiceImpl implements GoodsService {
                             .setBuyTime(new Timestamp(System.currentTimeMillis()))
                             .setStatus("已售")
             );
+            willerDao.deleteByGoodsId(goodsId);
             return new JsonRes(0, "succeed");
         } catch (Exception e) {
             return new JsonRes(1, e.getMessage());
+        }
+    }
+
+    @Override
+    public JsonRes<List<WillerListDTO>> listWillers(Integer goodsId) {
+        try {
+            return new JsonRes<List<WillerListDTO>>(0, "succeed")
+                    .setData(willerDao.listWillers(goodsId));
+        } catch (Exception e) {
+            return new JsonRes<>(1, e.getMessage());
         }
     }
 }
