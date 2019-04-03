@@ -1,8 +1,6 @@
 package com.zzw.secondhand.controller;
 
-import com.zzw.secondhand.dto.GoodsFormDTO;
-import com.zzw.secondhand.dto.GoodsListDTO;
-import com.zzw.secondhand.dto.GoodsListFilter;
+import com.zzw.secondhand.dto.*;
 import com.zzw.secondhand.po.Goods;
 import com.zzw.secondhand.service.FavoriteService;
 import com.zzw.secondhand.service.GoodsService;
@@ -65,6 +63,17 @@ public class GoodsController {
     @RequestMapping(value = "/buy", method = RequestMethod.PUT)
     public JsonRes buy(Integer userId, Integer id) {
         return goodsService.buy(userId, id);
+    }
+
+    @RequestMapping(value = "/contact", method = RequestMethod.POST)
+    public JsonRes<UserBasicDTO> contact(Integer goodsId, HttpServletRequest request) {
+        int uid = (Integer) request.getAttribute("session:userId");
+        return goodsService.contact(uid, goodsId);
+    }
+
+    @RequestMapping(value = "/listWillers", method = RequestMethod.GET)
+    public JsonRes<List<WillerListDTO>> listWillers(Integer goodsId) {
+        return goodsService.listWillers(goodsId);
     }
 
 }

@@ -22,8 +22,8 @@ public class IndexController {
     LoginService loginService;
 
     @RequestMapping(value = {"", "/"}, method = RequestMethod.GET)
-    public JsonRes<String> index() {
-        return new JsonRes<String>(0, "succeed").setData("(｡･∀･)ﾉﾞ嗨");
+    public JsonRes index() {
+        return JsonRes.createSuccess("(｡･∀･)ﾉﾞ嗨");
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)

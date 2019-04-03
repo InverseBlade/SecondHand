@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.zzw.secondhand.dao.WillerDao">
+
+    <insert id="insertAndGetId">
+        INSERT INTO second_willer(user_id, goods_id)
+        VALUES (#{userId}, #{goodsId})
+    </insert>
+
+    <delete id="deleteByGoodsId">
+        DELETE
+        FROM second_willer
+        WHERE goods_id = #{goodsId}
+    </delete>
+
+    <select id="selectByUserIdAndGoodsId" resultType="Willer">
+        SELECT *
+        FROM second_willer
+        WHERE user_id = #{userId}
+          AND goods_id = #{goodsId}
+        LIMIT 1
+    </select>
+
+    <select id="listWillers" resultType="com.zzw.secondhand.dto.WillerListDTO">
+        SELECT u.id,
+               u.user_name,
+               u.nick_name,
+               u.grade
+        FROM second_willer AS w
+                 INNER JOIN second_user u ON u.id = w.user_id
+        WHERE w.goods_id = #{goodsId}
+    </select>
+
+</mapper>

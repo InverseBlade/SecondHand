@@ -8,6 +8,18 @@ public class JsonRes<T> {
 
     private T data;
 
+    public static <T> JsonRes createSuccess() {
+        return new JsonRes<T>(0, "");
+    }
+
+    public static <T> JsonRes createSuccess(T data) {
+        return new JsonRes<T>(0, "").setData(data);
+    }
+
+    public static JsonRes createFail(String errMsg) {
+        return new JsonRes(1, errMsg);
+    }
+
     public JsonRes(Integer errCode, String errMsg) {
         this.errCode = errCode;
         this.errMsg = errMsg;

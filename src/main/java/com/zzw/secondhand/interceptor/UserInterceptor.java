@@ -20,9 +20,6 @@ public class UserInterceptor implements HandlerInterceptor {
     @Value("${GLOBAL.secret}")
     private String secret;
 
-    @Resource
-    private UserService userService;
-
     @Override
     public boolean preHandle(HttpServletRequest request,
                              HttpServletResponse response, Object handler) throws Exception {
